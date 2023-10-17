@@ -36,3 +36,8 @@ jobs:
 
       - name: terraform plan
         uses: dflook/terraform-plan@v1
+        env:
+          TF_VAR_boomi_account_id: ${{ secrets.TF_VAR_BOOMI_ACCOUNT_ID }}
+          TF_VAR_boomi_auth_token: ${{ secrets.TF_VAR_BOOMI_AUTH_TOKEN }}
+          TF_VAR_boomi_username: ${{ secrets.TF_VAR_BOOMI_USERNAME }}
+          TF_VAR_owner: ${{ secrets.TF_VAR_OWNER }}
