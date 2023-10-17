@@ -94,7 +94,7 @@
         "ssm:DeleteParameter",
         "ssm:ListTagsForResource"
       ],
-      "Resource": "arn:aws:ssm:us-east-1:{AWS_ACCOUNT_ID}:parameter//{APPLICATION_NAME}/*"
+      "Resource": "arn:aws:ssm:us-east-1:{AWS_ACCOUNT_ID}:parameter/{APPLICATION_NAME}/*"
     },
     {
       "Effect": "Allow",
@@ -108,7 +108,8 @@
       "Resource": [
         "arn:aws:logs:us-east-1:{AWS_ACCOUNT_ID}:log-group:/aws/ecs/{APPLICATION_NAME}-cluster*",
         "arn:aws:logs:us-east-1:{AWS_ACCOUNT_ID}:log-group:/fargate/service/{APPLICATION_NAME}*",
-        "arn:aws:logs:us-east-1:{AWS_ACCOUNT_ID}:log-group:/aws/lambda/{APPLICATION_NAME}-secret-install-lambda*"
+        "arn:aws:logs:us-east-1:{AWS_ACCOUNT_ID}:log-group:/aws/lambda/{APPLICATION_NAME}-secret-install-lambda*",
+        "arn:aws:logs:us-east-1:{AWS_ACCOUNT_ID}:log-group::log-stream"
       ]
     },
     {
