@@ -11,14 +11,14 @@ module "vpc" {
   private_subnets        = var.private_subnet_cidrs
   private_subnet_names   = local.private_subnet_names
   public_subnets         = var.public_subnet_cidrs
-  public_subnet_names    = local.public_subnet_names 
+  public_subnet_names    = local.public_subnet_names
   single_nat_gateway     = true
   one_nat_gateway_per_az = false
 
-  name = "${var.application}-vpc"
-  default_vpc_name = "${var.application}-vpc"
-  default_network_acl_name = "${var.application}-vpc-nacl"
-  default_route_table_name = "${var.application}-vpc-rt"
+  name                        = "${var.application}-vpc"
+  default_vpc_name            = "${var.application}-vpc"
+  default_network_acl_name    = "${var.application}-vpc-nacl"
+  default_route_table_name    = "${var.application}-vpc-rt"
   default_security_group_name = "${var.application}-vpc-sg"
   default_security_group_egress = [
     {
