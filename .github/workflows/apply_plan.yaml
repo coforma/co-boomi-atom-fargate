@@ -30,11 +30,17 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: '3.11'
-          cache: 'pip'
+      
+      # Restore cached directory
+      - name: Cache lambda package deps
+        uses: actions/cache@v3
+        with:
+          path: ./lambda/package
+          key: ${{ runner.os }}-lambda-package-${{ hashFiles('./lambda/requirements.txt') }}
 
       - name: Add lambda deps
         run: |
-          pip install --target ./lambda/package boto3 requests
+          pip install --target ./lambda/package -r ./lambda/requirements.txt
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4

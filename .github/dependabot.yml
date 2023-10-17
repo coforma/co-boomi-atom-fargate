@@ -19,3 +19,12 @@ updates:
     commit-message:
       prefix: "chore"
       include: "scope"
+
+  - package-ecosystem: "pip"
+    directory: "/lambda"
+    schedule:
+      interval: "daily"
+    target-branch: "main"  # change this to your default branch if different
+    commit-message:
+      prefix: "chore"
+      include: "scope"
