@@ -4,7 +4,10 @@ concurrency:
   cancel-in-progress: true
 
 on:
-  - pull_request
+  pull_request:
+    paths:
+      - '**.tf'
+      - '**.py'
 
 permissions:
   id-token: write
