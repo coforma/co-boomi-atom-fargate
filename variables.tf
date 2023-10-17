@@ -41,7 +41,7 @@ variable "container_port" {
 
 variable "atom_version" {
   description = "The version of the atom"
-  default     = "4.3.4"
+  default     = "4.3.5"
   type        = string
 }
 
