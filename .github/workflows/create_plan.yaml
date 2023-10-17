@@ -1,7 +1,13 @@
 name: Create terraform plan
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 on:
-  - pull_request
+  pull_request:
+    paths:
+      - '**.tf'
+      - '**.py'
 
 permissions:
   id-token: write
@@ -25,7 +31,12 @@ jobs:
           cache: 'pip'
 
       - name: Add lambda deps
-        run: pip install --target ./lambda/package boto3 requests
+        run: |
+          pip install --target ./lambda/package boto3 requests
+          cd lambda/package
+          zip -r ../rotate_install_token.zip .
+          cd ..
+          zip rotate_install_token.zip rotate_install_token.py
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4

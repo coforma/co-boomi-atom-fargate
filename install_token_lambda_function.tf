@@ -71,10 +71,8 @@ module "lambda" {
   timeout     = 60
   memory_size = 512
 
-  source_path = [
-    "${path.module}/lambda/rotate_install_token.py",
-    "${path.module}/lambda/package/",
-  ]
+  create_package         = false
+  local_existing_package = "./lambda/rotate_install_token.zip"
 
   attach_policy_json = true
   policy_json        = data.aws_iam_policy_document.lambda.json

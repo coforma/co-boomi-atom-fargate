@@ -2,6 +2,8 @@ name: Validate changes
 
 on:
   push:
+    paths:
+      - '**.tf'
     branches-ignore:
       - 'main'
 
