@@ -1,0 +1,21 @@
+version: 2
+updates:
+  - package-ecosystem: "terraform"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    target-branch: "main"  # change this to your default branch if different
+    allow:
+      - dependency-type: "all"
+    commit-message:
+      prefix: "chore"
+      include: "scope"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    target-branch: "main"  # change this to your default branch if different
+    commit-message:
+      prefix: "chore"
+      include: "scope"
