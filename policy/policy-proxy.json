@@ -51,7 +51,8 @@
         "ec2:DetachInternetGateway",
         "ec2:CreateVpc",
         "ec2:ModifyVpcAttribute",
-        "ec2:DeleteVpc"
+        "ec2:DeleteVpc",
+        "logs:DescribeLogGroups"
       ],
       "Resource": "*"
     },
@@ -103,13 +104,12 @@
         "logs:CreateLogGroup",
         "logs:PutRetentionPolicy",
         "logs:ListTagsLogGroup",
-        "logs:DeleteLogGroup",
-        "logs:DescribeLogGroups"
+        "logs:DeleteLogGroup"
       ],
       "Resource": [
-        "arn:aws:logs:us-east-1:{AWS_ACCOUNT_ID}:log-group:/aws/ecs/{APPLICATION_NAME}-cluster:*",
-        "arn:aws:logs:us-east-1:{AWS_ACCOUNT_ID}:log-group:/fargate/service/{APPLICATION_NAME}:*",
-        "arn:aws:logs:us-east-1:{AWS_ACCOUNT_ID}:log-group:/aws/lambda/{APPLICATION_NAME}-secret-install-lambda:*"
+        "arn:aws:logs:us-east-1:{AWS_ACCOUNT_ID}:log-group:/aws/ecs/{APPLICATION_NAME}-cluster*",
+        "arn:aws:logs:us-east-1:{AWS_ACCOUNT_ID}:log-group:/fargate/service/{APPLICATION_NAME}*",
+        "arn:aws:logs:us-east-1:{AWS_ACCOUNT_ID}:log-group:/aws/lambda/{APPLICATION_NAME}-secret-install-lambda*"
       ]
     },
     {
