@@ -157,6 +157,8 @@
       "Action": [
         "lambda:CreateFunction",
         "lambda:GetFunction",
+        "lambda:UpdateFunctionCode",
+        "lambda:PublishVersion",
         "lambda:ListVersionsByFunction",
         "lambda:GetFunctionCodeSigningConfig",
         "lambda:AddPermission",
