@@ -6,6 +6,7 @@ on:
       - main
 
 permissions:
+  id-token: write
   contents: read
   pull-requests: write
 
@@ -30,12 +31,16 @@ jobs:
           pip install --target ./lambda/package boto3 requests
 
       - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v2
+        uses: aws-actions/configure-aws-credentials@v4
         with:
+          audience: sts.amazonaws.com
           role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
           aws-region: ${{ secrets.AWS_REGION }}
 
       - name: terraform apply
         uses: dflook/terraform-apply@v1
-        with:
-          path: terraform
+        env:
+          TF_VAR_boomi_account_id: ${{ secrets.TF_VAR_BOOMI_ACCOUNT_ID }}
+          TF_VAR_boomi_auth_token: ${{ secrets.TF_VAR_BOOMI_AUTH_TOKEN }}
+          TF_VAR_boomi_username: ${{ secrets.TF_VAR_BOOMI_USERNAME }}
+          TF_VAR_owner: ${{ secrets.TF_VAR_OWNER }}

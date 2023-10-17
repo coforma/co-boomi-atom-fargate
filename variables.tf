@@ -41,7 +41,7 @@ variable "container_port" {
 
 variable "atom_version" {
   description = "The version of the atom"
-  default     = "4.3.5"
+  default     = "4.3.4"
   type        = string
 }
 
@@ -92,7 +92,7 @@ variable "atom_security_group_egress" {
     cidr_blocks = list(string)
   }))
   description = "Atom security group egress rules"
-  default     = [
+  default = [
     {
       from_port   = 31001
       to_port     = 31001
