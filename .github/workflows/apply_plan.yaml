@@ -35,10 +35,6 @@ jobs:
       - name: Add lambda deps
         run: |
           pip install --target ./lambda/package boto3 requests
-          cd lambda/package
-          zip -r ../rotate_install_token.zip .
-          cd ..
-          zip rotate_install_token.zip rotate_install_token.py
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
@@ -49,6 +45,8 @@ jobs:
 
       - name: terraform apply
         uses: dflook/terraform-apply@v1
+        with:
+          auto_approve: true
         env:
           TF_VAR_boomi_account_id: ${{ secrets.TF_VAR_BOOMI_ACCOUNT_ID }}
           TF_VAR_boomi_auth_token: ${{ secrets.TF_VAR_BOOMI_AUTH_TOKEN }}
