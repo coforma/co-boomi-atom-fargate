@@ -71,7 +71,7 @@ module "lambda" {
   timeout     = 60
   memory_size = 512
 
-  create_package = false
+  create_package         = false
   local_existing_package = "./lambda/rotate_install_token.zip"
 
   attach_policy_json = true
