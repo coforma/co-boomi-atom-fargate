@@ -40,7 +40,7 @@ module "vpc" {
 
 module "ecs" {
   source  = "terraform-aws-modules/ecs/aws"
-  version = "~> 5.4.0"
+  version = "~> 5.6.0"
 
   cluster_name = "${var.application}-cluster"
 }
