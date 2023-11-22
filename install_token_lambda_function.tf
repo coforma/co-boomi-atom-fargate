@@ -55,7 +55,7 @@ data "aws_iam_policy_document" "lambda" {
 
 module "lambda" {
   source  = "terraform-aws-modules/lambda/aws"
-  version = "~> 6.4.0"
+  version = "~> 6.5.0"
 
   function_name = local.function_name
   description   = "Example Secrets Manager secret rotation lambda function"
