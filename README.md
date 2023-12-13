@@ -18,7 +18,7 @@ This repo is configured for the intention of use for Coforma. If you intend to u
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | < 1.6 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 5.19.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 5.30.0 |
 
 ## Providers
 
@@ -30,10 +30,10 @@ This repo is configured for the intention of use for Coforma. If you intend to u
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_ecs"></a> [ecs](#module\_ecs) | terraform-aws-modules/ecs/aws | ~> 5.2.2 |
-| <a name="module_lambda"></a> [lambda](#module\_lambda) | terraform-aws-modules/lambda/aws | ~> 6.0.1 |
+| <a name="module_ecs"></a> [ecs](#module\_ecs) | terraform-aws-modules/ecs/aws | ~> 5.7.0 |
+| <a name="module_lambda"></a> [lambda](#module\_lambda) | terraform-aws-modules/lambda/aws | ~> 6.5.0 |
 | <a name="module_secrets_manager"></a> [secrets\_manager](#module\_secrets\_manager) | terraform-aws-modules/secrets-manager/aws | ~> 1.1.1 |
-| <a name="module_vpc"></a> [vpc](#module\_vpc) | terraform-aws-modules/vpc/aws | ~> 5.1.2 |
+| <a name="module_vpc"></a> [vpc](#module\_vpc) | terraform-aws-modules/vpc/aws | ~> 5.4.0 |
 
 ## Resources
 
@@ -70,6 +70,7 @@ This repo is configured for the intention of use for Coforma. If you intend to u
 | <a name="input_atom_security_group_egress"></a> [atom\_security\_group\_egress](#input\_atom\_security\_group\_egress) | Atom security group egress rules | <pre>list(object({<br>    from_port   = number<br>    to_port     = number<br>    description = string<br>    protocol    = string<br>    cidr_blocks = list(string)<br>  }))</pre> | <pre>[<br>  {<br>    "cidr_blocks": [<br>      "0.0.0.0/0"<br>    ],<br>    "description": "Unanet traffic",<br>    "from_port": 31001,<br>    "protocol": "tcp",<br>    "to_port": 31001<br>  }<br>]</pre> | no |
 | <a name="input_atom_version"></a> [atom\_version](#input\_atom\_version) | The version of the atom | `string` | `"4.3.5"` | no |
 | <a name="input_aws_region"></a> [aws\_region](#input\_aws\_region) | The AWS region to deploy to | `string` | `"us-east-1"` | no |
+| <a name="input_boomi_environment_id"></a> [boomi\_environment\_id](#input\_boomi\_environment\_id) | The environment ID of the atom is to be attached | `string` | `""` | no |
 | <a name="input_container_port"></a> [container\_port](#input\_container\_port) | The port of the container | `number` | `9090` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | The environment to deploy to | `string` | `"prod"` | no |
 | <a name="input_owner"></a> [owner](#input\_owner) | The owner of the application | `string` | `"devsecops"` | no |
