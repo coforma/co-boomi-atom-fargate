@@ -66,6 +66,7 @@ variable "boomi_account_id" {
 
 variable "boomi_environment_id" {
   description = "The environment ID of the atom is to be attached"
+  sensitive   = true
   default     = ""
   type        = string
 }
