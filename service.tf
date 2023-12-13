@@ -8,7 +8,7 @@ resource "aws_ecs_task_definition" "task_definition" {
       },
       {
         name  = "BOOMI_ENVIRONMENTID"
-        value = var.environment
+        value = var.boomi_environment_id
       },
       {
         name  = "ATOM_LOCALHOSTID"
