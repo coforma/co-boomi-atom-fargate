@@ -21,7 +21,7 @@ jobs:
           method: POST
           headers: |
             Content-Type: application/json
-            Accept": "application/json
+            Accept: "application/json
             Authorization: Basic ${{secrets.BOOMI_AUTH_STRING}}
           body: |
             {
