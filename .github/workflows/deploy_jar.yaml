@@ -26,7 +26,8 @@ jobs:
           body: |
             {
               "environmentId": "${{secrets.TF_VAR_BOOMI_ENVIRONMENT_ID}}",
-              "packageId": "${{secrets.JAR_PACKAGE_ID}}"}
+              "packageId": "${{secrets.JAR_PACKAGE_ID}}"},
+              "componentVersion": 2
             }
           retry-count: 3
           retry-delay: 500
