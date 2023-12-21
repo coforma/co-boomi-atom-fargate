@@ -15,9 +15,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Deploy Jar
-        uses: fjogeleit/http-request-action@v1
+        uses: tyrrrz/action-http-request@a675917a18329fee80af4e04f970546ac44df8ad
         with:
           url: ${{secrets.JAR_DEPLOY_URL}}
           method: POST
-          customHeaders: '{"Content-Type": "application/json", "Accept": "application/json", "Authorization": "Basic ${{secrets.BOOMI_AUTH_STRING}}"}'
-          data: '{"environmentId": "${{secrets.TF_VAR_BOOMI_ENVIRONMENT_ID}}", "packageId": "${{secrets.JAR_PACKAGE_ID}}"}'
+          headers: |
+            Content-Type: application/json
+            Accept": "application/json
+            Authorization: Basic ${{secrets.BOOMI_AUTH_STRING}}
+          body: |
+            {
+              "environmentId": "${{secrets.TF_VAR_BOOMI_ENVIRONMENT_ID}}",
+              "packageId": "${{secrets.JAR_PACKAGE_ID}}"}
+            }
+          retry-count: 3
+          retry-delay: 500
