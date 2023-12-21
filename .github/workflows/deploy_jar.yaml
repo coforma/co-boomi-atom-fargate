@@ -11,7 +11,7 @@ permissions:
   contents: read
 
 jobs:
-  plan:
+  deploy-jar:
     runs-on: ubuntu-latest
     steps:
       - name: Deploy Jar
@@ -19,7 +19,5 @@ jobs:
         with:
           url: ${{secrets.JAR_DEPLOY_URL}}
           method: POST
-          username: ${{secrets.TF_VAR_BOOMI_USERNAME}}
-          password: ${{secrets.TF_VAR_BOOMI_AUTH_TOKEN}}
-          customHeaders: '{"Content-Type": "application/json"}'
+          customHeaders: '{"Content-Type": "application/json", "Accept": "application/json", "Authorization": "Basic ${{secrets.BOOMI_AUTH_STRING}}"}'
           data: '{"environmentId": "${{secrets.TF_VAR_BOOMI_ENVIRONMENT_ID}}", "packageId": "${{secrets.JAR_PACKAGE_ID}}"}'
