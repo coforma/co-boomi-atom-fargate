@@ -12,6 +12,8 @@ This repo is configured for the intention of use for Coforma. If you intend to u
   
 - **VPC Configuration**: The Boomi Atom operates inside a private VPC but can connect to the internet using dedicated egress rules routed through a NAT Gateway and an Internet Gateway (IGW) pair.
 
+**Deploy Jar GHA Workflow**: Make sure to run this if a new deployment goes out or a failover event. This can be updated to be more automated in the future.
+
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
