@@ -30,7 +30,7 @@ jobs:
           python-version: '3.11'
 
       - name: Cache lambda package deps
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ./lambda/package
           key: ${{ runner.os }}-lambda-package-${{ hashFiles('./lambda/requirements.txt') }}
