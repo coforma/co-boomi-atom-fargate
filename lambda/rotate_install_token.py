@@ -46,14 +46,19 @@ def lambda_handler(event, context):
         raise ValueError("Secret %s is not enabled for rotation" % arn)
     versions = metadata['VersionIdsToStages']
     if token not in versions:
-        logger.error("Secret version %s has no stage for rotation of secret %s." % (token, arn))
-        raise ValueError("Secret version %s has no stage for rotation of secret %s." % (token, arn))
+        logger.error(
+            "Secret version %s has no stage for rotation of secret %s." % (token, arn))
+        raise ValueError(
+            "Secret version %s has no stage for rotation of secret %s." % (token, arn))
     if "AWSCURRENT" in versions[token]:
-        logger.info("Secret version %s already set as AWSCURRENT for secret %s." % (token, arn))
+        logger.info(
+            "Secret version %s already set as AWSCURRENT for secret %s." % (token, arn))
         return
     elif "AWSPENDING" not in versions[token]:
-        logger.error("Secret version %s not set as AWSPENDING for rotation of secret %s." % (token, arn))
-        raise ValueError("Secret version %s not set as AWSPENDING for rotation of secret %s." % (token, arn))
+        logger.error(
+            "Secret version %s not set as AWSPENDING for rotation of secret %s." % (token, arn))
+        raise ValueError(
+            "Secret version %s not set as AWSPENDING for rotation of secret %s." % (token, arn))
 
     if step == "createSecret":
         create_secret(service_client, arn, token)
@@ -78,7 +83,8 @@ def create_secret(service_client, arn, token):
     boomi_username = os.environ['BOOMI_USERNAME']
     boomi_auth_token = os.environ['BOOMI_AUTH_TOKEN']
     boomi_account_id = os.environ['BOOMI_ACCOUNT_ID']
-    auth_encoded = base64.b64encode(f"BOOMI_TOKEN.{boomi_username}:{boomi_auth_token}".encode()).decode('utf-8')
+    auth_encoded = base64.b64encode(
+        f"BOOMI_TOKEN.{boomi_username}:{boomi_auth_token}".encode()).decode('utf-8')
 
     url = f"https://api.boomi.com/api/rest/v1/{boomi_account_id}/InstallerToken/"
     payload = {
@@ -92,9 +98,11 @@ def create_secret(service_client, arn, token):
     }
 
     response = requests.post(url, headers=headers, json=payload)
-    response.raise_for_status()  # This will raise an HTTPError if the HTTP request returned an unsuccessful status code
+    # This will raise an HTTPError if the HTTP request returned an unsuccessful status code
+    response.raise_for_status()
 
-    boomi_token = response.json()['token']  # Assuming the response has a 'token' field
+    # Assuming the response has a 'token' field
+    boomi_token = response.json()['token']
 
     service_client.put_secret_value(
         SecretId=arn,
@@ -103,7 +111,9 @@ def create_secret(service_client, arn, token):
         VersionStages=['AWSPENDING']
     )
 
-    logger.info(f"createSecret: Successfully put secret for ARN {arn} and version {token}.")
+    logger.info(
+        f"createSecret: Successfully put secret for ARN {arn} and version {token}.")
+
 
 def finish_secret(service_client, arn, token):
     """Finish the secret
@@ -128,12 +138,14 @@ def finish_secret(service_client, arn, token):
         if "AWSCURRENT" in metadata["VersionIdsToStages"][version]:
             if version == token:
                 # The correct version is already marked as current, return
-                logger.info("finishSecret: Version %s already marked as AWSCURRENT for %s" % (version, arn))
+                logger.info(
+                    "finishSecret: Version %s already marked as AWSCURRENT for %s" % (version, arn))
                 return
             current_version = version
             break
 
     # Finalize by staging the secret version current
-    service_client.update_secret_version_stage(SecretId=arn, VersionStage="AWSCURRENT", MoveToVersionId=token, RemoveFromVersionId=current_version)
-    logger.info("finishSecret: Successfully set AWSCURRENT stage to version %s for secret %s." % (token, arn))
-    
+    service_client.update_secret_version_stage(
+        SecretId=arn, VersionStage="AWSCURRENT", MoveToVersionId=token, RemoveFromVersionId=current_version)
+    logger.info(
+        "finishSecret: Successfully set AWSCURRENT stage to version %s for secret %s." % (token, arn))
