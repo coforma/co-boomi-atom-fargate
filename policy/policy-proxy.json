@@ -58,9 +58,7 @@
     },
     {
       "Effect": "Allow",
-      "Action": [
-        "iam:PassRole"
-      ],
+      "Action": ["iam:PassRole"],
       "Resource": [
         "arn:aws:iam::{AWS_ACCOUNT_ID}:role/{APPLICATION_NAME}-secret-install-lambda",
         "arn:aws:iam::{AWS_ACCOUNT_ID}:role/{APPLICATION_NAME}-execution-task-role"
@@ -68,11 +66,7 @@
     },
     {
       "Effect": "Allow",
-      "Action": [
-        "s3:GetObject",
-        "s3:ListBucket",
-        "s3:PutObject"
-      ],
+      "Action": ["s3:GetObject", "s3:ListBucket", "s3:PutObject"],
       "Resource": [
         "arn:aws:s3:::{APPLICATION_NAME}-tfstate/*",
         "arn:aws:s3:::{APPLICATION_NAME}-tfstate"
@@ -80,11 +74,7 @@
     },
     {
       "Effect": "Allow",
-      "Action": [
-        "dynamodb:PutItem",
-        "dynamodb:GetItem",
-        "dynamodb:DeleteItem"
-      ],
+      "Action": ["dynamodb:PutItem", "dynamodb:GetItem", "dynamodb:DeleteItem"],
       "Resource": "arn:aws:dynamodb:us-east-1:{AWS_ACCOUNT_ID}:table/{APPLICATION_NAME}-dynamo-lock"
     },
     {
@@ -154,9 +144,7 @@
     },
     {
       "Effect": "Allow",
-      "Action": [
-        "lambda:*"
-      ],
+      "Action": ["lambda:*"],
       "Resource": "arn:aws:lambda:us-east-1:{AWS_ACCOUNT_ID}:function:{APPLICATION_PREFIX}-*"
     },
     {
@@ -171,11 +159,38 @@
     },
     {
       "Effect": "Allow",
-      "Action": [
-        "ecs:DeleteCluster",
-        "ecs:DescribeClusters"
-      ],
+      "Action": ["ecs:DeleteCluster", "ecs:DescribeClusters"],
       "Resource": "arn:aws:ecs:us-east-1:{AWS_ACCOUNT_ID}:cluster/{APPLICATION_PREFIX}-*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": ["ecs:TagResource"],
+      "Resource": "arn:aws:ecs:us-east-1:{AWS_ACCOUNT_ID}:service/{APPLICATION_PREFIX}-*",
+      "Condition": {
+        "StringEquals": {
+          "ecs:CreateAction": "CreateCluster"
+        }
+      }
+    },
+    {
+      "Effect": "Allow",
+      "Action": ["ecs:TagResource"],
+      "Resource": "arn:aws:ecs:us-east-1:{AWS_ACCOUNT_ID}:service/{APPLICATION_PREFIX}-*",
+      "Condition": {
+        "StringEquals": {
+          "ecs:CreateAction": "CreateService"
+        }
+      }
+    },
+    {
+      "Effect": "Allow",
+      "Action": ["ecs:TagResource"],
+      "Resource": "arn:aws:ecs:us-east-1:{AWS_ACCOUNT_ID}:service/{APPLICATION_PREFIX}-*",
+      "Condition": {
+        "StringEquals": {
+          "ecs:CreateAction": "RegisterTaskDefinition"
+        }
+      }
     }
   ]
 }
