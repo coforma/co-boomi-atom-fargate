@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Deploy Jar
-        uses: tyrrrz/action-http-request@a675917a18329fee80af4e04f970546ac44df8ad
+        uses: tyrrrz/action-http-request@1dd7ad841a34b9299f3741f7c7399f9feefdfb08
         with:
           url: ${{secrets.JAR_DEPLOY_URL}}
           method: POST
