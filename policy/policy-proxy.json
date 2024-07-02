@@ -163,34 +163,12 @@
       "Resource": "arn:aws:ecs:us-east-1:{AWS_ACCOUNT_ID}:cluster/{APPLICATION_PREFIX}-*"
     },
     {
+      "Sid": "AllowTagging",
       "Effect": "Allow",
-      "Action": ["ecs:TagResource"],
-      "Resource": "arn:aws:ecs:us-east-1:{AWS_ACCOUNT_ID}:service/{APPLICATION_PREFIX}-*",
-      "Condition": {
-        "StringEquals": {
-          "ecs:CreateAction": "CreateCluster"
-        }
-      }
-    },
-    {
-      "Effect": "Allow",
-      "Action": ["ecs:TagResource"],
-      "Resource": "arn:aws:ecs:us-east-1:{AWS_ACCOUNT_ID}:service/{APPLICATION_PREFIX}-*",
-      "Condition": {
-        "StringEquals": {
-          "ecs:CreateAction": "CreateService"
-        }
-      }
-    },
-    {
-      "Effect": "Allow",
-      "Action": ["ecs:TagResource"],
-      "Resource": "arn:aws:ecs:us-east-1:{AWS_ACCOUNT_ID}:service/{APPLICATION_PREFIX}-*",
-      "Condition": {
-        "StringEquals": {
-          "ecs:CreateAction": "RegisterTaskDefinition"
-        }
-      }
+      "Action": [
+          "ecs:TagResource"
+      ],
+      "Resource": "*"
     }
   ]
 }
