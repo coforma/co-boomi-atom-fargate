@@ -154,3 +154,7 @@ terraform-docs markdown table --output-file README.md --output-mode inject --sor
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Architecture
+
+![Architecture Diagram](./.images/architecture.svg?raw=true)
